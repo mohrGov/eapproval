@@ -1,0 +1,1084 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.9
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Aug 27, 2019 at 07:47 AM
+-- Server version: 5.0.77
+-- PHP Version: 5.1.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `kpm_eapproval`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayflowperibadi`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayflowperibadi` (
+  `currentstatus` varchar(2) NOT NULL,
+  `kodstatus` varchar(2) NOT NULL,
+  `nextrole` varchar(3) NOT NULL,
+  `PCode` varchar(1) NOT NULL,
+  `owner` varchar(10) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='flow proses intray';
+
+--
+-- Dumping data for table `intrayflowperibadi`
+--
+
+INSERT INTO `intrayflowperibadi` (`currentstatus`, `kodstatus`, `nextrole`, `PCode`, `owner`) VALUES
+('10', '20', '02', 'A', '2'),
+('20', '90', '', 'D', '1'),
+('10', '90', '', 'D', '3'),
+('30', '40', '04', 'B', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayhistory`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayhistory` (
+  `id` int(5) NOT NULL auto_increment,
+  `keputusan` varchar(1) NOT NULL,
+  `idinfo` varchar(8) NOT NULL,
+  `kodstatus` varchar(3) NOT NULL,
+  `cuti` varchar(1) NOT NULL,
+  `lengkap` varchar(1) NOT NULL,
+  `catatan` varchar(200) NOT NULL,
+  `updatedby` varchar(50) NOT NULL,
+  `updateddate` date NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `intrayhistory`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayinfo`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayinfo` (
+  `nama_seminar` varchar(200) NOT NULL,
+  `idinfo` varchar(8) NOT NULL,
+  `userid` varchar(50) NOT NULL,
+  `jenispermohonan` varchar(8) NOT NULL,
+  `tujuan` varchar(300) NOT NULL,
+  `tempat` varchar(100) NOT NULL,
+  `tarikhpergi` date NOT NULL,
+  `tarikhpulang` date NOT NULL,
+  `bil_peserta` int(5) default NULL,
+  `nama_ketua` varchar(50) default NULL,
+  `duta` varchar(500) default NULL,
+  `kekerapan` varchar(30) NOT NULL,
+  `belanja` varchar(40) NOT NULL,
+  `nilai_perbelanjaan` varchar(20) NOT NULL,
+  `kelayakan_cuti` varchar(10) NOT NULL,
+  `faedah` varchar(100) NOT NULL,
+  `tarikhpermohonan` datetime NOT NULL,
+  `lulus_kdn` varchar(40) NOT NULL,
+  `surat` varchar(100) NOT NULL,
+  `insurans` varchar(150) NOT NULL,
+  `flag_khas` varchar(1) NOT NULL,
+  `catatan_khas` varchar(100) NOT NULL,
+  `add1` varchar(100) NOT NULL,
+  `add2` varchar(100) NOT NULL,
+  `add3` varchar(100) NOT NULL,
+  `nama_saudara` varchar(50) NOT NULL,
+  `hubungan_saudara` varchar(20) NOT NULL,
+  `tel_saudara` varchar(12) NOT NULL,
+  `emel_saudara` varchar(20) NOT NULL,
+  `add_saudara` varchar(50) NOT NULL,
+  `add2_saudara` varchar(50) NOT NULL,
+  `add3_saudara` varchar(50) NOT NULL,
+  `tkh_mula` date NOT NULL,
+  `tkh_akhir` date NOT NULL,
+  `bil_cuti` varchar(4) NOT NULL,
+  `tkh_tugas` date NOT NULL,
+  `flag_kerap` varchar(1) NOT NULL default 'N',
+  `alasan_kekerapan` varchar(200) NOT NULL,
+  `biayai_oleh` varchar(50) NOT NULL,
+  `kos_lawatan` varchar(50) NOT NULL,
+  `ahli_rombongan` varchar(7) NOT NULL,
+  `offcode` varchar(10) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='info keselruhan proses';
+
+--
+-- Dumping data for table `intrayinfo`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayprofile`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayprofile` (
+  `userid` varchar(60) NOT NULL,
+  `nokp` varchar(12) default NULL,
+  `nama_pgw` varchar(100) default NULL,
+  `jawatan` varchar(80) default NULL,
+  `gred_jwtn` varchar(6) NOT NULL,
+  `tkh_lantikan` date default NULL,
+  `jabatan` varchar(50) default NULL,
+  `gaji_skrg` varchar(10) default NULL,
+  `status_perkahwinan` varchar(2) default NULL,
+  `nama_psgn` varchar(100) default NULL,
+  `jwtn_psgn` varchar(80) default NULL,
+  `jbtn_psgn` varchar(100) default NULL,
+  `tarikh_lantikan` date default NULL,
+  `tanggungan` varchar(10) default NULL,
+  `email` varchar(80) default NULL,
+  `notel` varchar(10) NOT NULL,
+  PRIMARY KEY  (`userid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `intrayprofile`
+--
+
+INSERT INTO `intrayprofile` (`userid`, `nokp`, `nama_pgw`, `jawatan`, `gred_jwtn`, `tkh_lantikan`, `jabatan`, `gaji_skrg`, `status_perkahwinan`, `nama_psgn`, `jwtn_psgn`, `jbtn_psgn`, `tarikh_lantikan`, `tanggungan`, `email`, `notel`) VALUES
+('enaazrina@ciast.gov.my', 'Ena Azrina D', 'Ena Azrina Daud', '3DD03L', '', NULL, 'CIAST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayprosesflow`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayprosesflow` (
+  `currentstatus` varchar(2) NOT NULL,
+  `kodstatus` varchar(2) NOT NULL,
+  `nextrole` varchar(3) NOT NULL,
+  `PCode` varchar(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='flow proses intray';
+
+--
+-- Dumping data for table `intrayprosesflow`
+--
+
+INSERT INTO `intrayprosesflow` (`currentstatus`, `kodstatus`, `nextrole`, `PCode`) VALUES
+('50', '90', '', 'D'),
+('10', '20', '02', 'A'),
+('10', '30', '03', 'D'),
+('20', '30', '03', 'D'),
+('30', '40', '04', 'B'),
+('40', '50', '99', 'D'),
+('20', '30', '03', 'A'),
+('30', '40', '04', 'A');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayrefjabatan`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayrefjabatan` (
+  `mainkod` varchar(10) NOT NULL,
+  `kod_jbtn` varchar(10) NOT NULL,
+  `nama_jbtn` varchar(200) NOT NULL,
+  `nick_desc` varchar(50) NOT NULL,
+  `kodref` varchar(10) NOT NULL,
+  `domain` varchar(100) NOT NULL,
+  `unit_pengurusan` varchar(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `intrayrefjabatan`
+--
+
+INSERT INTO `intrayrefjabatan` (`mainkod`, `kod_jbtn`, `nama_jbtn`, `nick_desc`, `kodref`, `domain`, `unit_pengurusan`) VALUES
+('PTPK', 'PTPK', 'PERBADANAN TABUNG PINJAMAN KEMAHIRAN', 'PTPK', '1', 'ptpk.gov.my', ''),
+('PERKESO', 'PERKESO', 'PERKESO', '', '1', 'perkeso.gov.my', ''),
+('JTM', 'ADTECSA', 'ADTEC SHAH ALAM', '', '1', 'adtecsa.gov.my', ''),
+('JTM', 'ADTECBP', 'ADTEC BATU PAHAT', '', '1', 'adtecbp.gov.my', ''),
+('JTM', 'ADTECKULIM', 'ADTEC KULIM', '', '1', 'adteckulim.gov.my', ''),
+('JTM', 'JMTI', 'JAPAN MALAYSIA TECHNICAL INSTITUTE', '', '1', 'jmti.gov.my', ''),
+('JTM', 'ADTECKMN', 'ADTEC KEMAMAN', '', '1', 'adteckmn.gov.my', ''),
+('JTM', 'ADTECMLK', 'ADTEC MELAKA', '', '1', 'adtecmlk.gov.my', ''),
+('JTM', 'ADTECTAIPI', 'ADTEC TAIPING', '', '1', 'adtectaiping.gov.my', ''),
+('JTM', 'ILPAPNT', 'ILP ARUMUGAM PILLAI NIBONG TEBAL', '', '1', 'ilpapnt.gov.my', ''),
+('JTM', 'ILPKL', 'ILP KUALA LUMPUR', '', '1', 'ilpkl.gov.my', ''),
+('JTM', 'ILPKLS', 'ILP KUALA LANGAT', '', '1', 'ilpkls.gov.my', ''),
+('JTM', 'ILPSELANDA', 'ILP SELANDAR', '', '1', 'ilpselandar.gov.my', ''),
+('JTM', 'ILPMELAKA', 'ILP MELAKA', '', '1', 'ilpmelaka.gov.my', ''),
+('JTM', 'ILPLEDANG', 'ILP LEDANG', '', '1', 'ilpledang.gov.my', ''),
+('JTM', 'ILPPG', 'ILP PASIR GUDANG', '', '1', 'ilppg.gov.my', ''),
+('JTM', 'ILPMERSING', 'ILP MERSING', '', '1', 'ilpmersing.gov.my', ''),
+('JTM', 'ILPPEDAS', 'ILP PEDAS', '', '1', 'ilppedas.gov.my', ''),
+('JTM', 'ILPIPOH', 'ILP IPOH', '', '1', 'ilpipoh.gov.my', ''),
+('JTM', 'ILPKUANTAN', 'ILP KUANTAN', '', '1', 'ilpkuantan.gov.my', ''),
+('JTM', 'ILPKANGAR', 'ILP KANGAR', '', '1', 'ilpkangar.gov.my', ''),
+('JTM', 'ILPJITRA', 'ILP JITRA', '', '1', 'ilpjitra.gov.my', ''),
+('JTM', 'ILPPERAI', 'ILP PERAI', '', '1', 'ilpperai.gov.my', ''),
+('JTM', 'ILPKBPP', 'ILP KEPALA BATAS', '', '1', 'ilpkbpp.gov.my', ''),
+('JTM', 'ILPKT', 'ILP KUALA TERENGGANU', '', '1', 'ilpkt.gov.my', ''),
+('JTM', 'ILPKB', 'ILP KOTA BHARU', '', '1', 'ilpkb.gov.my', ''),
+('JTM', 'ILPKK', 'ILP KOTA KINABALU', '', '1', 'ilpkk.gov.my', ''),
+('JTM', 'ILPSDK', 'ILP SANDAKAN', '', '1', 'ilpsdk.gov.my', ''),
+('JTM', 'ILPLABUAN', 'ILP LABUAN', '', '1', 'ilplabuan.gov.my', ''),
+('JTM', 'ILPKS', 'ILP KOTA SAMARAHAN', '', '1', 'ilpks.gov.my', ''),
+('JTM', 'ILPMIRI', 'ILP MIRI ', '', '1', 'ilpmiri.gov.my', ''),
+('JTM', 'ILPMARANG', 'ILP MARANG', '', '1', 'ilpmarang.gov.my', ''),
+('JPK', 'CIAST', 'CIAST ', 'CIAST', '1', 'ciast.gov.my', ''),
+(' ', '00055', 'Cawangan Kawalselia dan Penguatkuasaan', 'KSP', '3', '', 'O'),
+(' ', '00054', 'Bahagian Pengurusan Maklumat', 'BPM', '3', '', 'O'),
+(' ', '00053', 'Bahagian Akaun', 'AKAUN', '3', '', 'O'),
+(' ', '00052', 'Bahagian Khidmat Pengurusan', 'BKP', '3', '', 'O'),
+(' ', '00051-B', 'Cawangan Pembangunan dan Kewangan', 'KEW', '3', '', 'O'),
+(' ', '00051-A', 'Cawangan Pengurusan Sumber Manusia', 'PSM', '3', '', 'O'),
+(' ', '00051', 'Bah Pembangunan Kewangan & Sumber Manusia', 'BPKSM', '3', '', 'O'),
+(' ', '00050', 'Pejabat Timbalan Ketua Setiausaha (Operasi)', 'PTKSU(O)', '3', '', 'O'),
+(' ', '00044', 'Majlis Perundingan Gaji Negara', 'MPGN', '3', '', 'O'),
+(' ', '00043', 'Bahagian Antarabangsa', 'CA', '3', '', 'O'),
+(' ', '00042', 'Institute Of Labour Market Information And Analysis', 'ILMIA', '3', '', 'O'),
+(' ', '00041-B', 'Cawangan Dasar Perburuhan', 'DP', '3', '', 'D'),
+(' ', '00041-A', 'Cawangan Dasar Sumber Manusia', 'DSM', '3', '', 'D'),
+(' ', '00041', 'Bahagian Dasar', 'BD', '3', '', 'D'),
+(' ', '00040', 'Pejabat Timbalan Ketua Setiausaha (Dasar Dan Antarabangsa)', 'PTKSU(D)', '3', '', 'D'),
+(' ', '00030', 'Pejabat Ketua Setiausaha', 'PKSU', '3', '', 'O'),
+(' ', '00020', 'Pejabat Timbalan Menteri', 'PTIM', '3', '', 'O'),
+(' ', '00010', 'Pejabat Menteri', 'PMEN', '3', '', 'O'),
+(' ', '00060', 'Bahagian Undang-Undang', 'PUU', '3', '', 'O'),
+(' ', '00070', 'Unit Audit Dalam', 'AUDIT', '3', '', 'O'),
+(' ', '00080', 'Unit Komunikasi Korporat', 'UKK', '3', '', 'O'),
+(' ', '00090', 'KPI/Pusat Inovasi Nilai', 'KPI', '3', '', 'O'),
+(' ', '00100', 'Unit Integriti', 'INTEG', '3', '', 'O'),
+(' ', '10000', 'Jabatan Tenaga Kerja Semenanjung', 'JTKSM', '2', '', 'O'),
+(' ', '80000', 'Jabatan Keselamatan dan Kesihatan Pekerjaan', 'JKKP', '2', '', 'O'),
+('', '70000', 'Mahkamah Perusahaan', 'MP', '2', '', 'O'),
+('', '90000', 'Jabatan Tenaga Manusia', 'JTM', '2', '', 'O'),
+('', '60000', 'Jabatan Pembangunan Kemahiran', 'JPK', '2', '', 'O'),
+('', '40000', 'Jabatan Hal Ehwal Kesatuan Sekerja', 'JHEKS', '2', '', 'O'),
+('', '20000', 'Jabatan Tenaga Kerja Sabah', 'JTKSBH', '2', '', 'O'),
+('', '50000', 'Jabatan Perhubungan Perusahaan', 'JPP', '2', '', 'O'),
+('', '31300', 'Jabatan Tenaga Kerja Sarawak', 'JTKSRWK', '2', '', 'O');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayrefjawatan`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayrefjawatan` (
+  `s_jwtn` varchar(5) NOT NULL,
+  `kod_jwtn` varchar(10) NOT NULL,
+  `nama_jwtn` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `intrayrefjawatan`
+--
+
+INSERT INTO `intrayrefjawatan` (`s_jwtn`, `kod_jwtn`, `nama_jwtn`) VALUES
+('F', '3PF01', 'Pegawai Teknologi Maklumat'),
+('E', '3DE02', 'Pembantu Pegawai Latihan/ Penolong Pegawai Latihan/ Pegawai Latihan'),
+('E', '3LE06', 'Pembantu Ehwal Ekonomi'),
+('E', '3LE05', 'Pembantu Perangkaan'),
+('E', '3LE03', 'Penolong Pegawai Ehwal Ekonomi'),
+('E', '3LE02', 'Penolong Pegawai Perangkaan'),
+('E', '3PE02', 'Pegawai Ehwal Ekonomi'),
+('E', '3PE01', 'Perangkawan'),
+('D', '3DD03V', 'Pembantu Pegawai Latihan Vokasional'),
+('D', '3DD03L', 'Penolong Pegawai Latihan Vokasional'),
+('D', '3DD03P', 'Pegawai Latihan Vokasional'),
+('C', '3PC01', 'Pegawai Makmal Filem'),
+('B', '3LB01', 'Jurusolek'),
+('B', '3DB06', 'Jurufotografi'),
+('B', '3DB05', 'Artis Budaya'),
+('B', '3DB04', 'Pereka'),
+('B', '3DB03', 'Ahli Muzik'),
+('B', '3DB02', 'Pegawai Kebudayaan'),
+('B', '3DB01', 'Penerbit Rancangan'),
+('A', '3PA04', 'Juruterbang/ Pemeriksa Juruterbang'),
+('N', '3LN36', 'Pembantu Operasi'),
+('N', '3LN31', 'Penghantar Notis'),
+('N', '3LN29', 'Bentara Parlimen'),
+('N', '3LN28', 'Pembantu Penyediaan Makanan'),
+('N', '3LN27', 'Operator Wayarles'),
+('N', '3LN26', 'Juruaudio Visual'),
+('N', '3LN25', 'Pembantu Pengurusan Murid'),
+('N', '3LN24', 'Penyelia Asrama'),
+('N', '3LN22', 'Pembantu Penyelidik Sosial'),
+('N', '3LN17', 'Pembantu Penerbitan'),
+('N', '3LN16', 'Pegawai Khidmat Pelanggan'),
+('N', '3LN15', 'Pemeriksa Cap Jari'),
+('N', '3LN14', 'Pembantu Tadbir (Perkeranian/ Operasi)'),
+('N', '3LN12', 'Bentara Mesyuarat'),
+('N', '3LN11', 'Penghulu'),
+('N', '3LN09', 'Penolong Pegawai Penerbitan'),
+('N', '3LN08', 'Penolong Pegawai Penyelidik Sosial'),
+('N', '3LN07', 'Penolong Pegawai Tadbir'),
+('N', '3LN06', 'Penolong Pegawai Tanah (Pemakaian di Semenanjung sahaja)'),
+('N', '3LN05', 'Penolong Pengurus Asrama'),
+('N', '3PN06', 'Pegawai Tadbir'),
+('N', '3PN05', 'Pengurus Asrama'),
+('N', '3PN04', 'Jurubahasa Serentak'),
+('N', '3PN03', 'Pegawai Penerbitan'),
+('N', '3PN02', 'Pegawai Penyelidik Sosial'),
+('M', '3PM01', 'Pegawai Tadbir dan Diplomatik'),
+('L', '3DL01', 'Jurubahasa'),
+('L', '3LL04', 'Pembantu Tadbir (Undang-Undang)'),
+('L', '3LL03', 'Pembantu Syariah'),
+('L', '3LL02', 'Penolong Pegawai Undang-Undang'),
+('L', '3LL01', 'Penolong Pegawai Syariah'),
+('L', '3PL02', 'Pegawai Undang-Undang'),
+('L', '3PL01', 'Pegawai Syariah'),
+('K', '3PK02', 'Penguasa Bomba'),
+('J', '3DJ03', 'Pelukis Pelan (Seni Bina)/ Penolong Pegawai Seni Bina'),
+('J', '3DJ02', 'Pelukis Pelan (Kejuruteraan Awam)/ Penolong Jurutera'),
+('J', '3LJ18', 'Penjaga Jentera Elektrik'),
+('J', '3LJ13', 'Penguasa Bekalan Air'),
+('J', '3LJ12', 'Pembantu Pemeriksa Kilang dan Jentera'),
+('J', '3LJ11', 'Merinyu Tali Air'),
+('J', '3LJ09', 'Penolong Juruukur'),
+('J', '3LJ08', 'Penolong Pemeriksa Kilang dan Jentera'),
+('J', '3LJ07', 'Penolong Juruukur Bangunan'),
+('J', '3LJ06', 'Penolong Arkitek Landskap'),
+('J', '3LJ05', 'Penolong Juruukur Bahan'),
+('J', '3LJ02', 'Penolong Pegawai Perancang Bandar dan Desa'),
+('J', '3PJ09', 'Juruukur'),
+('J', '3PJ08', 'Juruukur Bahan'),
+('J', '3PJ07', 'Pemeriksa Kilang dan Jentera'),
+('J', '3PJ06', 'Jurutera'),
+('J', '3PJ05', 'Pegawai Perancang Bandar dan Desa'),
+('J', '3PJ04', 'Jurugeospatial'),
+('J', '3PJ03', 'Juruukur Bangunan'),
+('J', '3PJ02', 'Arkitek'),
+('J', '3PJ01', 'Arkitek Landskap'),
+('H', '3LH05', 'Pembantu Kemahiran'),
+('H', '3LH04', 'Pembantu Awam'),
+('H', '3LH03', 'Pemandu/ Operator Jentera Pemunggah'),
+('H', '3LH02', 'Pemandu Kenderaan'),
+('H', '3LH01', 'Operator Loji'),
+('G', '3DG04', 'Renjer Hutan/ Penolong Pemelihara Hutan'),
+('G', '3DG03', 'Pengawas Hutan'),
+('G', '3DG02', 'Pembantu Hidupan Liar'),
+('G', '3DG01', 'Pembantu Veterinar/ Penolong Pegawai Veterinar'),
+('G', '3LG15', 'Pembantu Taman/ Ladang'),
+('G', '3LG13', 'Pembantu Perikanan'),
+('G', '3LG12', 'Penyelia Rancangan Tanah'),
+('G', '3LG09', 'Penolong Pengurus Taman/ Ladang'),
+('G', '3LG07', 'Penolong Pegawai Rancangan Tanah'),
+('G', '3LG06', 'Penolong Pegawai Hidupan Liar'),
+('G', '3LG05', 'Penolong Pegawai Perikanan'),
+('G', '3LG04', 'Penolong Pegawai Pertanian'),
+('G', '3PG07', 'Pegawai Rancangan Tanah'),
+('G', '3PG06', 'Pengurus Taman/ Ladang'),
+('G', '3PG05', 'Pegawai Veterinar'),
+('G', '3PG04', 'Pegawai Hidupan Liar'),
+('G', '3PG03', 'Pegawai Perikanan'),
+('G', '3PG02', 'Pegawai Pertanian'),
+('G', '3PG01', 'Pemelihara Hutan'),
+('F', '3LF03', 'Juruteknik Komputer'),
+('FA', '3LF02', 'Penolong Pegawai Teknologi Maklumat'),
+('N', '3DN01', 'Pembantu Pentadbir Tanah/ Penolong Pentadbir Tanah (Pemakaian di Sabah/Sarawak)'),
+('N', '3DN02', 'Pembantu Setiausaha Pejabat/Setiausaha Pejabat'),
+('P', '3DP01P', 'Pegawai Siasatan'),
+('P', '3DP01L', 'Penolong Pegawai Siasatan'),
+('Q', '3PQ02', 'Pegawai Penyelidik'),
+('S', '3PS01', 'Pegawai Arkib'),
+('S', '3PS02', 'Perancang Bahasa'),
+('S', '3PS03', 'Kurator'),
+('S', '3PS04', 'Pegawai Psikologi'),
+('S', '3PS05', 'Pegawai Antidadah'),
+('S', '3PS06', 'Pustakawan'),
+('S', '3PS07', 'Pegawai Penerangan'),
+('S', '3PS08', 'Pegawai Belia dan Sukan'),
+('S', '3PS09', 'Pegawai Perhubungan Perusahaan'),
+('S', '3PS10', 'Pegawai Berita'),
+('S', '3PS11', 'Pegawai Kesatria'),
+('S', '3PS12', 'Pegawai Pembangunan Masyarakat'),
+('S', '3PS13', 'Pegawai Hal Ehwal Islam'),
+('S', '3PS14', 'Pegawai Komunikasi Strategik'),
+('S', '3LS01', 'Penolong Pustakawan'),
+('S', '3LS02', 'Penolong Perancang Bahasa'),
+('S', '3LS03', 'Penolong Pegawai Arkib'),
+('S', '3LS04', 'Penolong Pegawai Psikologi'),
+('S', '3LS05', 'Penolong Pegawai Belia dan Sukan'),
+('S', '3LS06', 'Penolong Kurator'),
+('S', '3LS07', 'Penolong Pegawai Hal Ehwal Islam'),
+('S', '3LS08', 'Penolong Pegawai Kesatria'),
+('S', '3LS09', 'Penolong Pegawai Penerangan'),
+('S', '3LS10', 'Penolong Pegawai Antidadah'),
+('S', '3LS11', 'Penolong Pegawai Perhubungan Perusahaan'),
+('S', '3LS12', 'Penolong Pegawai Pembangunan Masyarakat'),
+('S', '3LS13', 'Wartawan'),
+('S', '3LS14', 'Pembantu Belia dan Sukan'),
+('S', '3LS15', 'Pembantu Arkib'),
+('S', '3LS16', 'Pembantu Kesatria'),
+('S', '3LS18', 'Pembantu Penerangan'),
+('S', '3LS19', 'Pembantu Pemuliharaan'),
+('S', '3LS20', 'Pembantu Antidadah'),
+('S', '3LS21', 'Pembantu Hal Ehwal Islam'),
+('S', '3LS22', 'Pembantu Perhubungan Perusahaan'),
+('S', '3LS23', 'Pembantu Pembangunan Masyarakat'),
+('S', '3LS24', 'Pembantu Pustakawan'),
+('S', '3LS25', 'Pembantu Muzium'),
+('T', '3PT01', 'Pegawai Penguat Kuasa Maritim'),
+('U', '3PU01', 'Pengajar'),
+('U', '3PU02', 'Pegawai Optometri'),
+('U', '3PU03', 'Pegawai Dietetik'),
+('U', '3PU04', 'Pegawai Farmasi'),
+('U', '3PU05', 'Pegawai Pergigian'),
+('U', '3PU06', 'Pegawai Pemulihan Perubatan'),
+('U', '3PU07', 'Pegawai Perubatan'),
+('U', '3LU01', 'Jurupulih Perubatan'),
+('U', '3LU02', 'Penolong Pegawai Farmasi'),
+('U', '3LU03', 'Juruteknologi Makmal Perubatan'),
+('U', '3LU04', 'Juruteknologi Pergigian'),
+('U', '3LU05', 'Juruterapi Pergigian'),
+('U', '3LU06', 'Pembantu Pembedahan Pergigian'),
+('U', '3LU07', 'Pembantu Kesihatan Awam'),
+('U', '3LU08', 'Juruteknik Perubatan'),
+('U', '3LU09', 'Jururawat Masyarakat'),
+('U', '3LU10', 'Pembantu Perawatan Kesihatan'),
+('U', '3DU01', 'Penolong Pegawai Perubatan'),
+('U', '3DU02', 'Penolong Pegawai Kesihatan Persekitaran/Pegawai Kesihatan Persekitaran'),
+('U', '3DU03', 'Juru X-Ray'),
+('U', '3DU04', 'Jururawat'),
+('W', '3PW03', 'Juruaudit'),
+('W', '3PW04', 'Pegawai Aktuari'),
+('W', '3PW05', 'Pegawai Kewangan'),
+('W', '3PW06', 'Akauntan'),
+('W', '3PW07', 'Penguasa Kastam'),
+('W', '3PW08', 'Pegawai Penilaian'),
+('W', '3LW02', 'Penolong Penguasa Kastam'),
+('W', '3LW03', 'Penolong Akauntan'),
+('W', '3LW04', 'Penolong Juruaudit'),
+('W', '3LW05', 'Penolong Pegawai Penilaian'),
+('W', '3LW06', 'Pembantu Juruaudit'),
+('W', '3LW07', 'Pembantu Akauntan'),
+('W', '3LW08', 'Pembantu Tadbir (Kewangan)'),
+('W', '3LW09', 'Pembantu Penguasa Kastam'),
+('W', '3LW10', 'Pembantu Penilaian'),
+('Y', '3PY01', 'Pegawai Kanan Polis'),
+('Z', '3PZ01', 'Pegawai Angkatan Tetap, Angkatan Tentera Malaysia'),
+('X', 'MT200', 'Menteri'),
+('X', 'MT100', 'Timbalan Menteri'),
+('V', 'VDR01', 'Vendor / Kontraktor'),
+('X', 'PLP01', 'Pegawai Lantikan Politik'),
+('X', 'PKS01', 'Pekerja Khidmat Singkat'),
+('X', 'PSH01', 'Pekerja Sambilan Harian'),
+('X', 'GSM01', 'Kegunaan Umum');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayrefjawatan_old`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayrefjawatan_old` (
+  `kod_jwtn` varchar(10) NOT NULL,
+  `nama_jwtn` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `intrayrefjawatan_old`
+--
+
+INSERT INTO `intrayrefjawatan_old` (`kod_jwtn`, `nama_jwtn`) VALUES
+('0000', 'MENTERI'),
+('0001', 'COMMON ID'),
+('0002', 'PEKERJA KHIDMAT SINGKAT'),
+('1006', 'JURUAUDIT'),
+('1015', 'PEGAWAI PERTANIAN'),
+('1049', 'SETIAUSAHA SULIT KANAN'),
+('1109', 'PEGAWAI LATIHAN VOKASIONAL'),
+('1152', 'PEGAWAI PSIKOLOGI'),
+('1227', 'JURUTERA'),
+('1406', 'PEMERIKSA KILANG DAN JENTERA'),
+('1555', 'PEGAWAI UNDANG-UNDANG'),
+('1558', 'PUSTAKAWAN'),
+('1604', 'PEGAWAI PERUBATAN'),
+('1609', 'PEGAWAI TADBIR DAN DIPLOMATIK'),
+('1768', 'PENERBIT RANCANGAN'),
+('1770', 'PEGAWAI PERHUBUNGAN AWAM'),
+('3PE01', 'PERANGKAWAN'),
+('3PF01', 'PEGAWAI TEKNOLOGI MAKLUMAT'),
+('1888', 'PEGAWAI PENERANGAN'),
+('1951', 'PEGAWAI VETERINAR'),
+('1956', 'PEGAWAI PERHUBUNGAN PERUSAHAAN'),
+('1967', 'PEGAWAI EHWAL EKONOMI'),
+('1980', 'PEGAWAI BERITA'),
+('2010', 'PENOLONG PEGAWAI PERPUSTAKAAN'),
+('2019', 'PENOLONG PEGAWAI VETERINAR'),
+('2022', 'PENOLONG PEGAWAI PERTANIAN'),
+('2025', 'PENOLONG PEGAWAI PSIKOLOGI'),
+('2033', 'SETIAUSAHA SULIT'),
+('2038', 'PEGAWAI TADBIR'),
+('2085', 'PENOLONG PEGAWAI PERIKANAN'),
+('2122', 'PEGAWAI BURUH'),
+('2200', 'PENOLONG PEGAWAI TADBIR'),
+('2210', 'PENOLONG AKAUNTAN'),
+('2215', 'PENOLONG JURUAUDIT'),
+('2354', 'PEMBANTU PERUBATAN'),
+('2366', 'PENOLONG PEGAWAI LATIHAN VOKASIONAL'),
+('2409', 'PEGAWAI HAL EHWAL ISLAM'),
+('2556', 'PEMBANTU UNDANG-UNDANG'),
+('2602', 'PENOLONG PEMERIKSA KILANG DAN JENTERA'),
+('3LF02', 'PENOLONG PEGAWAI TEKNOLOGI MAKLUMAT'),
+('2782', 'PENOLONG PEGAWAI PERHUBUNGAN AWAM'),
+('2802', 'PENOLONG PEGAWAI KESIHATAN PERSEKITARAN'),
+('3LE02', 'PENOLONG PEGAWAI PERANGKAAN'),
+('2877', 'PENOLONG PEMELIHARA HUTAN'),
+('3DB04', 'PEREKA'),
+('2950', 'PEMBANTU VETERINAR'),
+('2956', 'PENOLONG PEGAWAI PERHUBUNGAN PERUSAHAAN'),
+('3LF03', 'JURUTEKNIK KOMPUTER'),
+('3018', 'PENOLONG JURURAWAT'),
+('3059', 'PEMBANTU PEGAWAI LATIHAN VOKASIONAL'),
+('3200', 'PEMBANTU TADBIR (PERKERANIAN/OPERASI)'),
+('3201', 'OPERATOR KOMPUTER'),
+('3220', 'SETIAUSAHA PEJABAT/PEMBANTU KHAS'),
+('3222', 'PEMBANTU JURUAUDIT'),
+('3232', 'PEGAWAI KHIDMAT PELANGGAN'),
+('3427', 'PEMBANTU PERANGKAAN'),
+('3436', 'PEMBANTU AKAUNTAN'),
+('3461', 'PEMBANTU TADBIR (KEWANGAN)'),
+('3557', 'PEMBANTU TABDIR (UNDANG-UNDANG)'),
+('3814', 'JURUBAHASA'),
+('3912', 'PEMBANTU PEMERIKSA KILANG DAN JENTERA'),
+('3956', 'PEMBANTU PERHUBUNGAN PERUSAHAAN'),
+('4109', 'PEGAWAI PERHUBUNGAN'),
+('4112', 'PEMBANTU PERPUSTAKAAN'),
+('4200', 'PEMBANTU TADBIR RENDAH'),
+('4310', 'JURURAWAT'),
+('4320', 'PENGHANTAR NOTIS'),
+('3DB06', 'JURUFOTOGRAFI'),
+('4813', 'JURUTEKNIK'),
+('4830', 'PEMBANTU PERTANIAN'),
+('5454', 'PEMBANTU AM PEJABAT'),
+('5721', 'OPERATOR MESIN PROSESAN DATA'),
+('6700', 'PEMANDU KENDERAAN'),
+('1104', 'AKAUNTAN'),
+('0003', 'TIMBALAN MENTERI'),
+('1018', 'PEGAWAI ARKIB'),
+('1871', 'PEGAWAI TEKNOLOGI MAKLUMAT'),
+('3DJ0', 'PELUKIS PELAN (KEJURUTERAAN AWAM)/ PENOLONG J'),
+('3DN0', 'PEMBANTU SETIAUSAHA PEJABAT'),
+('3DP0', 'PEGAWAI SIASATAN/PENOLONG PEGAWAI SIASATAN'),
+('3LN3', 'PEMBANTU OPERASI'),
+('3PG0', 'PEMELIHARA HUTAN'),
+('3512', 'PEMBANTU PERIKANAN'),
+('2165', 'PENOLONG PEGAWAI HAL EHWAL ISLAM'),
+('1771', 'PEGAWAI PENERBITAN'),
+('3913', 'PENJAGA JENTERA ELEKTRIK'),
+('5455', 'PEMBANTU AWAM'),
+('3558', 'PEMBANTU TADBIR (PEGAWAI KHIDMAT PELANGGAN)'),
+('3559', 'PEMBANTU KEMAHIRAN'),
+('3560', 'PENYELIA ASRAMA'),
+('3561', 'TENAGA PENGAJAR'),
+('3PM01', 'PEGAWAI TADBIR DAN DIPLOMATIK'),
+('3LN07', 'PENOLONG PEGAWAI TADBIR'),
+('2764', 'PENOLONG PEGAWAI TEKNOLOGI MAKLUMAT');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayrefrole`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayrefrole` (
+  `idrole` varchar(2) NOT NULL,
+  `descrole` varchar(50) NOT NULL,
+  `Person` varchar(50) NOT NULL,
+  PRIMARY KEY  (`idrole`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `intrayrefrole`
+--
+
+INSERT INTO `intrayrefrole` (`idrole`, `descrole`, `Person`) VALUES
+('01', 'Penyokong Pertama', 'SUB/Pengarah Agensi'),
+('02', 'Penyokong Kedua', 'Pengarah Agensi'),
+('03', 'Penyokong Ketiga', 'Admin PSM'),
+('04', 'Pelulus Keempat', 'SUB PSM'),
+('99', 'Pelulus', 'KSU'),
+('09', 'Admin Agensi ', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayrefstatus`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayrefstatus` (
+  `idstatus` varchar(8) NOT NULL,
+  `descstatus` varchar(50) NOT NULL,
+  `tindakan` varchar(100) NOT NULL,
+  `tindakan_peribadi` varchar(50) NOT NULL,
+  PRIMARY KEY  (`idstatus`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `intrayrefstatus`
+--
+
+INSERT INTO `intrayrefstatus` (`idstatus`, `descstatus`, `tindakan`, `tindakan_peribadi`) VALUES
+('10', 'Baru', 'Untuk Sokongan Penyokong Pertama', 'Untuk Sokongan Pelulus'),
+('20', 'Penyokong Pertama - Selesai', 'Untuk Sokongan Penyokong Kedua', 'Selesai'),
+('30', 'Penyokong Pertama/Kedua  - Selesai', 'Admin PSM', 'Selesai'),
+('40', 'Sokongan Admin PSM - Selesai', 'Untuk Sokongan Penyokong keempat', ''),
+('50', 'Penyokong Keempat - Selesai', 'kelulusan KSU (Urusan Rasmi) / TKSU (Urusan Peribadi)', ''),
+('90', 'KSU/TKSU Selesai', 'Selesai', 'Selesai'),
+('99', 'Tidak Disokong', 'Selesai', 'Selesai');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayrefstatusperkahwinan`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayrefstatusperkahwinan` (
+  `kodkahwin` varchar(2) NOT NULL,
+  `desckahwin` varchar(30) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `intrayrefstatusperkahwinan`
+--
+
+INSERT INTO `intrayrefstatusperkahwinan` (`kodkahwin`, `desckahwin`) VALUES
+('01', 'Bujang'),
+('02', 'Berkahwin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayreftujuan`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayreftujuan` (
+  `jenispermohonan` varchar(8) NOT NULL,
+  `descpermohonan` varchar(50) NOT NULL,
+  PRIMARY KEY  (`jenispermohonan`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `intrayreftujuan`
+--
+
+INSERT INTO `intrayreftujuan` (`jenispermohonan`, `descpermohonan`) VALUES
+('F0000001', 'Kelulusan ke luar negara (Peribadi)'),
+('F0000002', 'Kelulusan ke luar negara (Rasmi)');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayroletugas`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayroletugas` (
+  `kodtugas` varchar(1) NOT NULL,
+  `desctugas` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='tugassemasa';
+
+--
+-- Dumping data for table `intrayroletugas`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intraystatussemasa`
+--
+
+CREATE TABLE IF NOT EXISTS `intraystatussemasa` (
+  `idinfo` varchar(8) NOT NULL,
+  `kodstatus` varchar(8) NOT NULL,
+  `catatan` varchar(100) NOT NULL,
+  `cuti` varchar(1) NOT NULL,
+  `keputusan` varchar(1) NOT NULL,
+  `updatedDate` datetime NOT NULL,
+  `updatedBy` varchar(50) NOT NULL,
+  `waiting_for` varchar(50) NOT NULL,
+  PRIMARY KEY  (`idinfo`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `intraystatussemasa`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intraytempuserluar`
+--
+
+CREATE TABLE IF NOT EXISTS `intraytempuserluar` (
+  `userid` varchar(50) NOT NULL,
+  `passwd` varchar(20) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `nokp` varchar(12) NOT NULL,
+  `jabatan` varchar(50) NOT NULL,
+  `jawatan` varchar(50) NOT NULL,
+  `flagsah` varchar(1) NOT NULL default 'N',
+  `tarikhmohon` date NOT NULL default '0000-00-00',
+  `updateddate` date NOT NULL,
+  `updatedby` varchar(50) NOT NULL,
+  PRIMARY KEY  (`userid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='temporaray table untuk daftar pengguna luar';
+
+--
+-- Dumping data for table `intraytempuserluar`
+--
+
+INSERT INTO `intraytempuserluar` (`userid`, `passwd`, `nama`, `nokp`, `jabatan`, `jawatan`, `flagsah`, `tarikhmohon`, `updateddate`, `updatedby`) VALUES
+('aslisa@ciast.gov.my', '123456', 'Aslisa Mat Saat', '800101100022', 'CIAST', '3DD03P', 'Y', '2019-08-01', '0000-00-00', ''),
+('enaazrina@ciast.gov.my', '123456', 'Ena Azrina Daud', '770310032222', 'CIAST', '3DD03L', 'Y', '2019-08-01', '2019-08-01', 'aslisa@ciast.gov.my');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `intrayusers`
+--
+
+CREATE TABLE IF NOT EXISTS `intrayusers` (
+  `userid` varchar(30) NOT NULL,
+  `rank` varchar(2) NOT NULL,
+  `role` varchar(2) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `intrayusers`
+--
+
+INSERT INTO `intrayusers` (`userid`, `rank`, `role`) VALUES
+('aslisa@ciast.gov.my', 'AD', '09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `refemeladmin`
+--
+
+CREATE TABLE IF NOT EXISTS `refemeladmin` (
+  `kodemel` varchar(2) NOT NULL,
+  `email` varchar(30) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `refemeladmin`
+--
+
+INSERT INTO `refemeladmin` (`kodemel`, `email`) VALUES
+('01', 'haslina.hardy@mohr.gov.my'),
+('02', 'mizalawati@mohr.gov.my'),
+('03', 'arnihazwani@mohr.gov.my');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ref_carian_tarikh`
+--
+
+CREATE TABLE IF NOT EXISTS `ref_carian_tarikh` (
+  `kod` varchar(20) NOT NULL,
+  `name` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_carian_tarikh`
+--
+
+INSERT INTO `ref_carian_tarikh` (`kod`, `name`) VALUES
+('semuatarikh', 'Semua Tarikh'),
+('tarikhpermohonan', 'Tarikh Permohonan'),
+('tarikhpergi', 'Tarikh Pergi'),
+('tarikhpulang', 'Tarikh Pulang');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ref_country`
+--
+
+CREATE TABLE IF NOT EXISTS `ref_country` (
+  `country_code` char(3) NOT NULL default '',
+  `description` varchar(100) NOT NULL default '',
+  `description_en` varchar(100) NOT NULL default '',
+  `nationality` varchar(100) NOT NULL default '',
+  `nationality_en` varchar(100) NOT NULL default '',
+  `sort_order` varchar(5) NOT NULL default ''
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_country`
+--
+
+INSERT INTO `ref_country` (`country_code`, `description`, `description_en`, `nationality`, `nationality_en`, `sort_order`) VALUES
+('TTO', 'TRINIDAD AND TOBAGO', 'TRINIDAD AND TOBAGO', 'TRINIDAD AND TOBAGO', 'TRINIDAD AND TOBAGO', '2150'),
+('TUN', 'TUNISIA', 'TUNISIA', 'TUNISIA', 'TUNISIA', '2160'),
+('TUR', 'TURKEY', 'TURKEY', 'TURKEY', 'TURKEY', '2170'),
+('TKM', 'TURKMENISTAN', 'TURKMENISTAN', 'TURKMENISTAN', 'TURKMENISTAN', '2180'),
+('TCA', 'TURKS AND CAICOS ISLANDS', 'TURKS AND CAICOS ISLANDS', 'TURKS AND CAICOS ISLANDS', 'TURKS AND CAICOS ISLANDS', '2190'),
+('TUV', 'TUVALU', 'TUVALU', 'TUVALU', 'TUVALU', '2200'),
+('UGA', 'UGANDA', 'UGANDA', 'UGANDA', 'UGANDA', '2210'),
+('UKR', 'UKRAINE', 'UKRAINE', 'UKRAINE', 'UKRAINE', '2220'),
+('ARE', 'UNITED ARAB EMIRATES', 'UNITED ARAB EMIRATES', 'UNITED ARAB EMIRATES', 'UNITED ARAB EMIRATES', '2230'),
+('GBR', 'UNITED KINGDOM', 'UNITED KINGDOM', 'UNITED KINGDOM', 'UNITED KINGDOM', '2240'),
+('USA', 'UNITED STATES', 'UNITED STATES', 'UNITED STATES', 'UNITED STATES', '2250'),
+('UMI', 'UNITED STATES MINOR OUTLYING ISLANDS', 'UNITED STATES MINOR OUTLYING ISLANDS', 'UNITED STATES MINOR OUTLYING ISLANDS', 'UNITED STATES MINOR OUTLYING ISLANDS', '2260'),
+('URY', 'URUGUAY', 'URUGUAY', 'URUGUAY', 'URUGUAY', '2270'),
+('UZB', 'UZBEKISTAN', 'UZBEKISTAN', 'UZBEKISTAN', 'UZBEKISTAN', '2280'),
+('VUT', 'VANUATU', 'VANUATU', 'VANUATU', 'VANUATU', '2290'),
+('VEN', 'VENEZUELA', 'VENEZUELA', 'VENEZUELA', 'VENEZUELA', '2300'),
+('VNM', 'VIETNAM', 'VIETNAM', 'VIETNAM', 'VIETNAM', '2310'),
+('VGB', 'VIRGIN ISLANDS, BRITISH', 'VIRGIN ISLANDS, BRITISH', 'VIRGIN ISLANDS, BRITISH', 'VIRGIN ISLANDS, BRITISH', '2320'),
+('VIR', 'VIRGIN ISLANDS, U.S', 'VIRGIN ISLANDS, U.S', 'VIRGIN ISLANDS, U.S', 'VIRGIN ISLANDS, U.S', '2330'),
+('WLF', 'WALLIS AND FUTUNA', 'WALLIS AND FUTUNA', 'WALLIS AND FUTUNA', 'WALLIS AND FUTUNA', '2340'),
+('ESH', 'WESTERN SAHARA', 'WESTERN SAHARA', 'WESTERN SAHARA', 'WESTERN SAHARA', '2350'),
+('YEM', 'YEMEN', 'YEMEN', 'YEMEN', 'YEMEN', '2360'),
+('YUG', 'YUGOSLAVIA', 'YUGOSLAVIA', 'YUGOSLAVIA', 'YUGOSLAVIA', '2370'),
+('ZMB', 'ZAMBIA', 'ZAMBIA', 'ZAMBIA', 'ZAMBIA', '2380'),
+('ZWE', 'ZIMBABWE', 'ZIMBABWE', 'ZIMBABWE', 'ZIMBABWE', '2390'),
+('AFG', 'AFGHANISTAN', 'AFGHANISTAN', 'AFGHANISTAN', 'AFGHANISTAN', '10'),
+('ALB', 'ALBANIA', 'ALBANIA', 'ALBANIA', 'ALBANIA', '20'),
+('DZA', 'ALGERIA', 'ALGERIA', 'ALGERIA', 'ALGERIA', '30'),
+('ASM', 'AMERICAN SAMOA', 'AMERICAN SAMOA', 'AMERICAN SAMOA', 'AMERICAN SAMOA', '40'),
+('AND', 'ANDORRA', 'ANDORRA', 'ANDORRA', 'ANDORRA', '50'),
+('AGO', 'ANGOLA', 'ANGOLA', 'ANGOLA', 'ANGOLA', '60'),
+('AIA', 'ANGUILLA', 'ANGUILLA', 'ANGUILLA', 'ANGUILLA', '70'),
+('ATA', 'ANTARTICA', 'ANTARTICA', 'ANTARTICA', 'ANTARTICA', '80'),
+('ATG', 'ANTIGUA AND BARBUDA', 'ANTIGUA AND BARBUDA', 'ANTIGUA AND BARBUDA', 'ANTIGUA AND BARBUDA', '90'),
+('ARG', 'ARGENTINA', 'ARGENTINA', 'ARGENTINA', 'ARGENTINA', '100'),
+('ARM', 'ARMENIA', 'ARMENIA', 'ARMENIA', 'ARMENIA', '110'),
+('ABW', 'ARUBA', 'ARUBA', 'ARUBA', 'ARUBA', '120'),
+('AUS', 'AUSTRALIA', 'AUSTRALIA', 'AUSTRALIA', 'AUSTRALIA', '130'),
+('AUT', 'AUSTRIA', 'AUSTRIA', 'AUSTRIA', 'AUSTRIA', '140'),
+('AZE', 'AZERBAIJAN', 'AZERBAIJAN', 'AZERBAIJAN', 'AZERBAIJAN', '150'),
+('BHS', 'BAHAMAS', 'BAHAMAS', 'BAHAMAS', 'BAHAMAS', '160'),
+('BHR', 'BAHRAIN', 'BAHRAIN', 'BAHRAIN', 'BAHRAIN', '170'),
+('BGD', 'BANGLADESH', 'BANGLADESH', 'BANGLADESH', 'BANGLADESH', '180'),
+('BRB', 'BARBADOS', 'BARBADOS', 'BARBADOS', 'BARBADOS', '190'),
+('BLR', 'BELARUS', 'BELARUS', 'BELARUS', 'BELARUS', '200'),
+('BEL', 'BELGIUM', 'BELGIUM', 'BELGIUM', 'BELGIUM', '210'),
+('BLZ', 'BELIZE', 'BELIZE', 'BELIZE', 'BELIZE', '220'),
+('BEN', 'BENIN', 'BENIN', 'BENIN', 'BENIN', '230'),
+('BMU', 'BERMUDA', 'BERMUDA', 'BERMUDA', 'BERMUDA', '240'),
+('BTN', 'BHUTAN', 'BHUTAN', 'BHUTAN', 'BHUTAN', '250'),
+('BOL', 'BOLIVIA', 'BOLIVIA', 'BOLIVIA', 'BOLIVIA', '260'),
+('BIH', 'BOSNIA AND HERZEGOVINA', 'BOSNIA AND HERZEGOVINA', 'BOSNIA AND HERZEGOVINA', 'BOSNIA AND HERZEGOVINA', '270'),
+('BWA', 'BOTSWANA', 'BOTSWANA', 'BOTSWANA', 'BOTSWANA', '280'),
+('BVT', 'BOUVET ISLAND', 'BOUVET ISLAND', 'BOUVET ISLAND', 'BOUVET ISLAND', '290'),
+('BRA', 'BRAZIL', 'BRAZIL', 'BRAZIL', 'BRAZIL', '300'),
+('IOT', 'BRITISH INDIAN OCEAN TERRITORY', 'BRITISH INDIAN OCEAN TERRITORY', 'BRITISH INDIAN OCEAN TERRITORY', 'BRITISH INDIAN OCEAN TERRITORY', '310'),
+('BRN', 'BRUNEI DARUSSALAM', 'BRUNEI DARUSSALAM', 'BRUNEI DARUSSALAM', 'BRUNEI DARUSSALAM', '320'),
+('BGR', 'BULGARIA', 'BULGARIA', 'BULGARIA', 'BULGARIA', '330'),
+('BFA', 'BURKINA FASO', 'BURKINA FASO', 'BURKINA FASO', 'BURKINA FASO', '340'),
+('BDI', 'BURUNDI', 'BURUNDI', 'BURUNDI', 'BURUNDI', '350'),
+('KHM', 'CAMBODIA', 'CAMBODIA', 'CAMBODIA', 'CAMBODIA', '360'),
+('CMR', 'CAMEROON', 'CAMEROON', 'CAMEROON', 'CAMEROON', '370'),
+('CAN', 'CANADA', 'CANADA', 'CANADA', 'CANADA', '380'),
+('CPV', 'CAPE VERDE', 'CAPE VERDE', 'CAPE VERDE', 'CAPE VERDE', '390'),
+('CYM', 'CAYMAN ISLANDS', 'CAYMAN ISLANDS', 'CAYMAN ISLANDS', 'CAYMAN ISLANDS', '400'),
+('CAF', 'CENTRAL AFRICAN REPUBLIC', 'CENTRAL AFRICAN REPUBLIC', 'CENTRAL AFRICAN REPUBLIC', 'CENTRAL AFRICAN REPUBLIC', '410'),
+('TCD', 'CHAD', 'CHAD', 'CHAD', 'CHAD', '420'),
+('CHL', 'CHILE', 'CHILE', 'CHILE', 'CHILE', '430'),
+('CHN', 'CHINA', 'CHINA', 'CHINA', 'CHINA', '440'),
+('CXR', 'CHRISTMAS ISLAND', 'CHRISTMAS ISLAND', 'CHRISTMAS ISLAND', 'CHRISTMAS ISLAND', '450'),
+('CCK', 'COCOS (KEELING) ISLANDS', 'COCOS (KEELING) ISLANDS', 'COCOS (KEELING) ISLANDS', 'COCOS (KEELING) ISLANDS', '460'),
+('COL', 'COLOMBIA', 'COLOMBIA', 'COLOMBIA', 'COLOMBIA', '470'),
+('LSO', 'LESOTHO', 'LESOTHO', 'LESOTHO', 'LESOTHO', '1200'),
+('LBR', 'LIBERIA', 'LIBERIA', 'LIBERIA', 'LIBERIA', '1210'),
+('LBY', 'LIBYAN ARAB JAMAHIRIYA', 'LIBYAN ARAB JAMAHIRIYA', 'LIBYAN ARAB JAMAHIRIYA', 'LIBYAN ARAB JAMAHIRIYA', '1220'),
+('LIE', 'LIECHTENSTEIN', 'LIECHTENSTEIN', 'LIECHTENSTEIN', 'LIECHTENSTEIN', '1230'),
+('LTU', 'LITHUANIA', 'LITHUANIA', 'LITHUANIA', 'LITHUANIA', '1240'),
+('LUX', 'LUXEMBOURG', 'LUXEMBOURG', 'LUXEMBOURG', 'LUXEMBOURG', '1250'),
+('MAC', 'MACAU', 'MACAU', 'MACAU', 'MACAU', '1260'),
+('MKD', 'MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF', 'MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF', 'MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF', 'MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF', '1270'),
+('MDG', 'MADAGASCAR', 'MADAGASCAR', 'MADAGASCAR', 'MADAGASCAR', '1280'),
+('MWI', 'MALAWI', 'MALAWI', 'MALAWI', 'MALAWI', '1290'),
+('MYS', 'MALAYSIA', 'MALAYSIA', 'MALAYSIA', 'MALAYSIA', '1300'),
+('MDV', 'MALDIVES', 'MALDIVES', 'MALDIVES', 'MALDIVES', '1310'),
+('MLI', 'MALI', 'MALI', 'MALI', 'MALI', '1320'),
+('MLT', 'MALTA', 'MALTA', 'MALTA', 'MALTA', '1330'),
+('MHL', 'MARSHALL ISLANDS', 'MARSHALL ISLANDS', 'MARSHALL ISLANDS', 'MARSHALL ISLANDS', '1340'),
+('MTQ', 'MARTINIQUE', 'MARTINIQUE', 'MARTINIQUE', 'MARTINIQUE', '1350'),
+('MRT', 'MAURITANIA', 'MAURITANIA', 'MAURITANIA', 'MAURITANIA', '1360'),
+('MUS', 'MAURITIUS', 'MAURITIUS', 'MAURITIUS', 'MAURITIUS', '1370'),
+('MYT', 'MAYOTTE', 'MAYOTTE', 'MAYOTTE', 'MAYOTTE', '1380'),
+('MEX', 'MEXICO', 'MEXICO', 'MEXICO', 'MEXICO', '1390'),
+('FSM', 'MICRONESIA, FEDERATED STATES OF', 'MICRONESIA, FEDERATED STATES OF', 'MICRONESIA, FEDERATED STATES OF', 'MICRONESIA, FEDERATED STATES OF', '1400'),
+('MDA', 'MOLDOVA, REPUBLIC OF', 'MOLDOVA, REPUBLIC OF', 'MOLDOVA, REPUBLIC OF', 'MOLDOVA, REPUBLIC OF', '1410'),
+('MCO', 'MONACO', 'MONACO', 'MONACO', 'MONACO', '1420'),
+('MNG', 'MONGOLIA', 'MONGOLIA', 'MONGOLIA', 'MONGOLIA', '1430'),
+('MSR', 'MONTSERRAT', 'MONTSERRAT', 'MONTSERRAT', 'MONTSERRAT', '1440'),
+('MAR', 'MOROCCO', 'MOROCCO', 'MOROCCO', 'MOROCCO', '1450'),
+('MOZ', 'MOZAMBIQUE', 'MOZAMBIQUE', 'MOZAMBIQUE', 'MOZAMBIQUE', '1460'),
+('MMR', 'MYANMAR', 'MYANMAR', 'MYANMAR', 'MYANMAR', '1470'),
+('NAM', 'NAMIBIA', 'NAMIBIA', 'NAMIBIA', 'NAMIBIA', '1480'),
+('NRU', 'NAURU', 'NAURU', 'NAURU', 'NAURU', '1490'),
+('NPL', 'NEPAL', 'NEPAL', 'NEPAL', 'NEPAL', '1500'),
+('NLD', 'NETHERLANDS', 'NETHERLANDS', 'NETHERLANDS', 'NETHERLANDS', '1510'),
+('ANT', 'NETHERLANDS ANTILLES', 'NETHERLANDS ANTILLES', 'NETHERLANDS ANTILLES', 'NETHERLANDS ANTILLES', '1520'),
+('NCL', 'NEW CALEDONIA', 'NEW CALEDONIA', 'NEW CALEDONIA', 'NEW CALEDONIA', '1530'),
+('NZL', 'NEW ZEALAND', 'NEW ZEALAND', 'NEW ZEALAND', 'NEW ZEALAND', '1540'),
+('NIC', 'NICARAGUA', 'NICARAGUA', 'NICARAGUA', 'NICARAGUA', '1550'),
+('NER', 'NIGER', 'NIGER', 'NIGER', 'NIGER', '1560'),
+('NGA', 'NIGERIA', 'NIGERIA', 'NIGERIA', 'NIGERIA', '1570'),
+('NIU', 'NIUE', 'NIUE', 'NIUE', 'NIUE', '1580'),
+('NFK', 'NORFOLK ISLAND', 'NORFOLK ISLAND', 'NORFOLK ISLAND', 'NORFOLK ISLAND', '1590'),
+('MNP', 'NORTHERN MARIANA ISLANDS', 'NORTHERN MARIANA ISLANDS', 'NORTHERN MARIANA ISLANDS', 'NORTHERN MARIANA ISLANDS', '1600'),
+('NOR', 'NORWAY', 'NORWAY', 'NORWAY', 'NORWAY', '1610'),
+('OMN', 'OMAN', 'OMAN', 'OMAN', 'OMAN', '1620'),
+('PAK', 'PAKISTAN', 'PAKISTAN', 'PAKISTAN', 'PAKISTAN', '1630'),
+('PLW', 'PALAU', 'PALAU', 'PALAU', 'PALAU', '1640'),
+('PLS', 'PALESTINIAN TERRITORY', 'PALESTINIAN TERRITORY', 'PALESTINIAN TERRITORY', 'PALESTINIAN TERRITORY', '1650'),
+('PAN', 'PANAMA', 'PANAMA', 'PANAMA', 'PANAMA', '1660'),
+('PNG', 'PAPUA NEW GUINEA', 'PAPUA NEW GUINEA', 'PAPUA NEW GUINEA', 'PAPUA NEW GUINEA', '1670'),
+('PRY', 'PARAGUAY', 'PARAGUAY', 'PARAGUAY', 'PARAGUAY', '1680'),
+('PER', 'PERU', 'PERU', 'PERU', 'PERU', '1690'),
+('PHL', 'PHILIPPINES', 'PHILIPPINES', 'PHILIPPINES', 'PHILIPPINES', '1700'),
+('PCN', 'PITCAIRN', 'PITCAIRN', 'PITCAIRN', 'PITCAIRN', '1710'),
+('POL', 'POLAND', 'POLAND', 'POLAND', 'POLAND', '1720'),
+('PRT', 'PORTUGAL', 'PORTUGAL', 'PORTUGAL', 'PORTUGAL', '1730'),
+('PRI', 'PUERTO RICO', 'PUERTO RICO', 'PUERTO RICO', 'PUERTO RICO', '1740'),
+('QAT', 'QATAR', 'QATAR', 'QATAR', 'QATAR', '1750'),
+('REU', 'REUNION', 'REUNION', 'REUNION', 'REUNION', '1760'),
+('ROM', 'ROMANIA', 'ROMANIA', 'ROMANIA', 'ROMANIA', '1770'),
+('RUS', 'RUSSIAN FEDERATION', 'RUSSIAN FEDERATION', 'RUSSIAN FEDERATION', 'RUSSIAN FEDERATION', '1780'),
+('RWA', 'RWANDA', 'RWANDA', 'RWANDA', 'RWANDA', '1790'),
+('SHN', 'SAINT HELENA', 'SAINT HELENA', 'SAINT HELENA', 'SAINT HELENA', '1800'),
+('KNA', 'SAINT KITTS AND NEVIS', 'SAINT KITTS AND NEVIS', 'SAINT KITTS AND NEVIS', 'SAINT KITTS AND NEVIS', '1810'),
+('LCA', 'SAINT LUCIA', 'SAINT LUCIA', 'SAINT LUCIA', 'SAINT LUCIA', '1820'),
+('SPM', 'SAINT PIERRE AND MIQUELON', 'SAINT PIERRE AND MIQUELON', 'SAINT PIERRE AND MIQUELON', 'SAINT PIERRE AND MIQUELON', '1830'),
+('VCT', 'SAINT VINCENT AND THE GRENADINES', 'SAINT VINCENT AND THE GRENADINES', 'SAINT VINCENT AND THE GRENADINES', 'SAINT VINCENT AND THE GRENADINES', '1840'),
+('WSM', 'SAMOA', 'SAMOA', 'SAMOA', 'SAMOA', '1850'),
+('SMR', 'SAN MARINO', 'SAN MARINO', 'SAN MARINO', 'SAN MARINO', '1860'),
+('STP', 'SAO TOME AND PRINCIPE', 'SAO TOME AND PRINCIPE', 'SAO TOME AND PRINCIPE', 'SAO TOME AND PRINCIPE', '1870'),
+('SAU', 'SAUDI ARABIA', 'SAUDI ARABIA', 'SAUDI ARABIA', 'SAUDI ARABIA', '1880'),
+('SEN', 'SENEGAL', 'SENEGAL', 'SENEGAL', 'SENEGAL', '1890'),
+('SYC', 'SEYCHELLES', 'SEYCHELLES', 'SEYCHELLES', 'SEYCHELLES', '1900'),
+('SLE', 'SIERRA LEONE', 'SIERRA LEONE', 'SIERRA LEONE', 'SIERRA LEONE', '1910'),
+('SGP', 'SINGAPORE', 'SINGAPORE', 'SINGAPORE', 'SINGAPORE', '1920'),
+('SVK', 'SLOVAKIA', 'SLOVAKIA', 'SLOVAKIA', 'SLOVAKIA', '1930'),
+('SVN', 'SLOVENIA', 'SLOVENIA', 'SLOVENIA', 'SLOVENIA', '1940'),
+('SLB', 'SOLOMON ISLANDS', 'SOLOMON ISLANDS', 'SOLOMON ISLANDS', 'SOLOMON ISLANDS', '1950'),
+('SOM', 'SOMALIA', 'SOMALIA', 'SOMALIA', 'SOMALIA', '1960'),
+('ZAF', 'SOUTH AFRICA', 'SOUTH AFRICA', 'SOUTH AFRICA', 'SOUTH AFRICA', '1970'),
+('SGS', 'SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS', 'SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS', 'SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS', 'SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS', '1980'),
+('ESP', 'SPAIN', 'SPAIN', 'SPAIN', 'SPAIN', '1990'),
+('LKA', 'SRI LANKA', 'SRI LANKA', 'SRI LANKA', 'SRI LANKA', '2000'),
+('SDN', 'SUDAN', 'SUDAN', 'SUDAN', 'SUDAN', '2010'),
+('SUR', 'SURINAME', 'SURINAME', 'SURINAME', 'SURINAME', '2020'),
+('SJM', 'SVALBARD AND JAN MAYEN', 'SVALBARD AND JAN MAYEN', 'SVALBARD AND JAN MAYEN', 'SVALBARD AND JAN MAYEN', '2030'),
+('SWZ', 'SWAZILAND', 'SWAZILAND', 'SWAZILAND', 'SWAZILAND', '2040'),
+('SWE', 'SWEDEN', 'SWEDEN', 'SWEDEN', 'SWEDEN', '2050'),
+('CHE', 'SWITZERLAND', 'SWITZERLAND', 'SWITZERLAND', 'SWITZERLAND', '2060'),
+('SYR', 'SYRIAN ARAB REPUBLIC', 'SYRIAN ARAB REPUBLIC', 'SYRIAN ARAB REPUBLIC', 'SYRIAN ARAB REPUBLIC', '2070'),
+('TWN', 'TAIWAN, PROVINCE OF CHINA', 'TAIWAN, PROVINCE OF CHINA', 'TAIWAN, PROVINCE OF CHINA', 'TAIWAN, PROVINCE OF CHINA', '2080'),
+('TJK', 'TAJIKISTAN', 'TAJIKISTAN', 'TAJIKISTAN', 'TAJIKISTAN', '2090'),
+('ZA', 'TANZANIA, UNITED REPUBLIC OF', 'TANZANIA, UNITED REPUBLIC OF', 'TANZANIA, UNITED REPUBLIC OF', 'TANZANIA, UNITED REPUBLIC OF', '2100'),
+('THA', 'THAILAND', 'THAILAND', 'THAILAND', 'THAILAND', '2110'),
+('TGO', 'TOGO', 'TOGO', 'TOGO', 'TOGO', '2120'),
+('TKL', 'TOKELAU', 'TOKELAU', 'TOKELAU', 'TOKELAU', '2130'),
+('TON', 'TONGA', 'TONGA', 'TONGA', 'TONGA', '2140'),
+('COM', 'COMOROS', 'COMOROS', 'COMOROS', 'COMOROS', '480'),
+('COG', 'CONGO (ZAIRE)', 'CONGO (ZAIRE)', 'CONGO (ZAIRE)', 'CONGO (ZAIRE)', '490'),
+('COD', 'CONGO, THE DEMOCRATIC RUPBLIC OF THE', 'CONGO, THE DEMOCRATIC RUPBLIC OF THE', 'CONGO, THE DEMOCRATIC RUPBLIC OF THE', 'CONGO, THE DEMOCRATIC RUPBLIC OF THE', '500'),
+('COK', 'COOK ISLAND', 'COOK ISLAND', 'COOK ISLAND', 'COOK ISLAND', '510'),
+('CRI', 'COSTA RICA', 'COSTA RICA', 'COSTA RICA', 'COSTA RICA', '520'),
+('CIV', 'COTE D?IVOIRE', 'COTE D?IVOIRE', 'COTE D?IVOIRE', 'COTE D?IVOIRE', '530'),
+('HRV', 'CROATIA', 'CROATIA', 'CROATIA', 'CROATIA', '540'),
+('CUB', 'CUBA', 'CUBA', 'CUBA', 'CUBA', '550'),
+('CYP', 'CYPRUS', 'CYPRUS', 'CYPRUS', 'CYPRUS', '560'),
+('CZE', 'CZECH REPUBLIC', 'CZECH REPUBLIC', 'CZECH REPUBLIC', 'CZECH REPUBLIC', '570'),
+('DNK', 'DENMARK', 'DENMARK', 'DENMARK', 'DENMARK', '580'),
+('DJI', 'DJIBOUTI', 'DJIBOUTI', 'DJIBOUTI', 'DJIBOUTI', '590'),
+('DMA', 'DOMINICA', 'DOMINICA', 'DOMINICA', 'DOMINICA', '600'),
+('DOM', 'DOMINICAN REPUBLIC', 'DOMINICAN REPUBLIC', 'DOMINICAN REPUBLIC', 'DOMINICAN REPUBLIC', '610'),
+('TMP', 'EAST TIMOR', 'EAST TIMOR', 'EAST TIMOR', 'EAST TIMOR', '620'),
+('ECU', 'ECUADOR', 'ECUADOR', 'ECUADOR', 'ECUADOR', '630'),
+('EGY', 'EGYPT', 'EGYPT', 'EGYPT', 'EGYPT', '640'),
+('SLV', 'EL SALVADOR', 'EL SALVADOR', 'EL SALVADOR', 'EL SALVADOR', '650'),
+('GNQ', 'EQUATORIAL GUINEA', 'EQUATORIAL GUINEA', 'EQUATORIAL GUINEA', 'EQUATORIAL GUINEA', '660'),
+('ERI', 'ERITREA', 'ERITREA', 'ERITREA', 'ERITREA', '670'),
+('EST', 'ESTONIA', 'ESTONIA', 'ESTONIA', 'ESTONIA', '680'),
+('ETH', 'ETHIOPIA', 'ETHIOPIA', 'ETHIOPIA', 'ETHIOPIA', '690'),
+('FLK', 'FALKLAND ISLANDS (MALVINAS)', 'FALKLAND ISLANDS (MALVINAS)', 'FALKLAND ISLANDS (MALVINAS)', 'FALKLAND ISLANDS (MALVINAS)', '700'),
+('FRO', 'FAROE ISLANDS', 'FAROE ISLANDS', 'FAROE ISLANDS', 'FAROE ISLANDS', '710'),
+('FJI', 'FIJI', 'FIJI', 'FIJI', 'FIJI', '720'),
+('FIN', 'FINLAND', 'FINLAND', 'FINLAND', 'FINLAND', '730'),
+('FRA', 'FRANCE', 'FRANCE', 'FRANCE', 'FRANCE', '740'),
+('GUF', 'FRENCH GUIANA', 'FRENCH GUIANA', 'FRENCH GUIANA', 'FRENCH GUIANA', '750'),
+('PYF', 'FRENCH POLYNESIA', 'FRENCH POLYNESIA', 'FRENCH POLYNESIA', 'FRENCH POLYNESIA', '760'),
+('ATF', 'FRENCH SOUTHERN TERRITORIES', 'FRENCH SOUTHERN TERRITORIES', 'FRENCH SOUTHERN TERRITORIES', 'FRENCH SOUTHERN TERRITORIES', '770'),
+('GAB', 'GABON', 'GABON', 'GABON', 'GABON', '780'),
+('GMB', 'GAMBIA', 'GAMBIA', 'GAMBIA', 'GAMBIA', '790'),
+('GEO', 'GEORGIA', 'GEORGIA', 'GEORGIA', 'GEORGIA', '800'),
+('DEU', 'GERMANY', 'GERMANY', 'GERMANY', 'GERMANY', '810'),
+('GHA', 'GHANA', 'GHANA', 'GHANA', 'GHANA', '820'),
+('GIB', 'GIBRALTAR', 'GIBRALTAR', 'GIBRALTAR', 'GIBRALTAR', '830'),
+('GRC', 'GREECE', 'GREECE', 'GREECE', 'GREECE', '840'),
+('GRL', 'GREENLAND', 'GREENLAND', 'GREENLAND', 'GREENLAND', '850'),
+('GRD', 'GRENADA', 'GRENADA', 'GRENADA', 'GRENADA', '860'),
+('GLP', 'GUADELOUPE', 'GUADELOUPE', 'GUADELOUPE', 'GUADELOUPE', '870'),
+('GUM', 'GUAM', 'GUAM', 'GUAM', 'GUAM', '880'),
+('GTM', 'GUATEMALA', 'GUATEMALA', 'GUATEMALA', 'GUATEMALA', '890'),
+('GIN', 'GUINEA', 'GUINEA', 'GUINEA', 'GUINEA', '900'),
+('GNB', 'GUINEA-BISSAU', 'GUINEA-BISSAU', 'GUINEA-BISSAU', 'GUINEA-BISSAU', '910'),
+('GUY', 'GUYANA', 'GUYANA', 'GUYANA', 'GUYANA', '920'),
+('HTI', 'HAITI', 'HAITI', 'HAITI', 'HAITI', '930'),
+('HMD', 'HEARD ISLAND AND MCDONALD ISLANDS', 'HEARD ISLAND AND MCDONALD ISLANDS', 'HEARD ISLAND AND MCDONALD ISLANDS', 'HEARD ISLAND AND MCDONALD ISLANDS', '940'),
+('VAT', 'HOLY SEE (VATICAN CITY STATE)', 'HOLY SEE (VATICAN CITY STATE)', 'HOLY SEE (VATICAN CITY STATE)', 'HOLY SEE (VATICAN CITY STATE)', '950'),
+('HND', 'HONDURAS', 'HONDURAS', 'HONDURAS', 'HONDURAS', '960'),
+('HKG', 'HONG KONG', 'HONG KONG', 'HONG KONG', 'HONG KONG', '970'),
+('HUN', 'HUNGARY', 'HUNGARY', 'HUNGARY', 'HUNGARY', '980'),
+('ISL', 'ICELAND', 'ICELAND', 'ICELAND', 'ICELAND', '990'),
+('IND', 'INDIA', 'INDIA', 'INDIA', 'INDIA', '1000'),
+('IDN', 'INDONESIA', 'INDONESIA', 'INDONESIA', 'INDONESIA', '1010'),
+('IRN', 'IRAN, ISLAMIC REPUBLIC OF', 'IRAN, ISLAMIC REPUBLIC OF', 'IRAN, ISLAMIC REPUBLIC OF', 'IRAN, ISLAMIC REPUBLIC OF', '1020'),
+('IRQ', 'IRAQ', 'IRAQ', 'IRAQ', 'IRAQ', '1030'),
+('IRL', 'IRELAND', 'IRELAND', 'IRELAND', 'IRELAND', '1040'),
+('ISR', 'ISRAEL', 'ISRAEL', 'ISRAEL', 'ISRAEL', '1050'),
+('ITA', 'ITALY', 'ITALY', 'ITALY', 'ITALY', '1060'),
+('JAM', 'JAMAICA', 'JAMAICA', 'JAMAICA', 'JAMAICA', '1070'),
+('JPN', 'JAPAN', 'JAPAN', 'JAPAN', 'JAPAN', '1080'),
+('JOR', 'JORDAN', 'JORDAN', 'JORDAN', 'JORDAN', '1090'),
+('KAZ', 'KAZAKSTAN', 'KAZAKSTAN', 'KAZAKSTAN', 'KAZAKSTAN', '1100'),
+('KEN', 'KENYA', 'KENYA', 'KENYA', 'KENYA', '1110'),
+('KIR', 'KIRIBATI', 'KIRIBATI', 'KIRIBATI', 'KIRIBATI', '1120'),
+('PRK', 'KOREA, DEMOCRATIC PEOPLE?S REPUBLIC OF', 'KOREA, DEMOCRATIC PEOPLE?S REPUBLIC OF', 'KOREA, DEMOCRATIC PEOPLE?S REPUBLIC OF', 'KOREA, DEMOCRATIC PEOPLE?S REPUBLIC OF', '1130'),
+('KOR', 'KOREA, REPUBLIC OF', 'KOREA, REPUBLIC OF', 'KOREA, REPUBLIC OF', 'KOREA, REPUBLIC OF', '1140'),
+('KWT', 'KUWAIT', 'KUWAIT', 'KUWAIT', 'KUWAIT', '1150'),
+('KGZ', 'KYRGYZSTAN', 'KYRGYZSTAN', 'KYRGYZSTAN', 'KYRGYZSTAN', '1160'),
+('LAO', 'LAO PEOPLE?S DEMOCRATIC REPUBLIC', 'LAO PEOPLE?S DEMOCRATIC REPUBLIC', 'LAO PEOPLE?S DEMOCRATIC REPUBLIC', 'LAO PEOPLE?S DEMOCRATIC REPUBLIC', '1170'),
+('LVA', 'LATVIA', 'LATVIA', 'LATVIA', 'LATVIA', '1180'),
+('LBN', 'LEBANON', 'LEBANON', 'LEBANON', 'LEBANON', '1190'),
+('TTD', 'TIDAK DINYATAKAN', 'TIDAK DINYATAKAN', 'TIDAK DINYATAKAN', 'TIDAK DINYATAKAN', '0'),
+('LLN', 'LAIN-LAIN NEGARA', 'LAIN-LAIN', 'LAIN-LAIN', 'LAIN-LAIN', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ref_punca_belanja`
+--
+
+CREATE TABLE IF NOT EXISTS `ref_punca_belanja` (
+  `kod` varchar(1) NOT NULL,
+  `description` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_punca_belanja`
+--
+
+INSERT INTO `ref_punca_belanja` (`kod`, `description`) VALUES
+('1', 'Simpanan '),
+('2', 'Pinjaman'),
+('3', 'Tajaan');
